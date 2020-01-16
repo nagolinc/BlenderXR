@@ -36,6 +36,7 @@
 #include "vr_widget_addprimitive.h"
 #include "vr_widget_extrude.h"
 #include "vr_widget_menu.h"
+#include "vr_widget_texturepaint.h"
 #include "vr_widget_sculpt.h"
 #include "vr_widget_select.h"
 #include "vr_widget_switchtool.h"
@@ -213,6 +214,10 @@ void Widget_SwitchTool::render_icon(const Mat44f& t, VR_Side controller_side, bo
 		case TYPE_KNIFE: {
 			VR_Draw::render_rect(-0.009f, 0.009f, 0.009f, -0.009f, 0.001f, 1.0f, 1.0f, VR_Draw::knife_tex);
 			break;
+		}
+		case TYPE_TEXTUREPAINT: {
+			  VR_Draw::render_rect(-0.009f, 0.009f, 0.009f, -0.009f, 0.001f, 1.0f, 1.0f, VR_Draw::texturepaint_tex);
+			  break;
 		}
 		case TYPE_SCULPT: {
 			switch ((eBrushSculptTool)Widget_Sculpt::brush) {

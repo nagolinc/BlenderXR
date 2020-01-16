@@ -80,6 +80,8 @@ public:
 		,
 		TYPE_KNIFE
 		,
+    TYPE_TEXTUREPAINT
+		,
 		TYPE_SCULPT
 		,
     TYPE_ANIMATION
@@ -177,6 +179,8 @@ public:
 		,
 		MENUTYPE_TS_KNIFE	/* Tool settings for the knife widget. */
 		,
+    MENUTYPE_TS_TEXTUREPAINT /* Tool settings for the sculpt widget. */
+    ,
 		MENUTYPE_TS_SCULPT	/* Tool settings for the sculpt widget. */
 		,
 		MENUTYPE_TS_SCULPT_DRAW /* Tool settings for the sculpt widget (draw brushes submenu). */
@@ -197,6 +201,8 @@ public:
 		,
 		MENUTYPE_AS_EXTRUDE	/* Action settings for the extrude widget. */
 		,
+    MENUTYPE_AS_TEXTUREPAINT /* Action settings for the sculpt widget. */
+    ,
 		MENUTYPE_AS_SCULPT	/* Action settings for the sculpt widget. */
     ,
     MENUTYPE_AS_ANIMATION /* Action settings for the animation widget. */

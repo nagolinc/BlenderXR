@@ -193,7 +193,8 @@ public:
 	static Texture *bevel_tex;	/* Texture for the "bevel" icon. */
 	static Texture *loopcut_tex;	/* Texture for the "loopcut" icon. */
 	static Texture *knife_tex;	/* Texture for the "knife" icon. */
-	static Texture *sculpt_tex;	/* Texture for the "sculpt" icon. */
+  static Texture *texturepaint_tex;   /* Texture for the "texturepaint" icon. */
+  static Texture *sculpt_tex;	/* Texture for the "sculpt" icon. */
 	static Texture *sculpt_draw_tex;	/* Texture for the "sculpt draw" icon. */
 	static Texture *sculpt_clay_tex;	/* Texture for the "sculpt clay" icon. */
 	static Texture *sculpt_claystrips_tex;	/* Texture for the "sculpt clay strips" icon. */

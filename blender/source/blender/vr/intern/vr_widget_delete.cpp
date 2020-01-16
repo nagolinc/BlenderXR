@@ -290,6 +290,10 @@ void Widget_Delete::click(VR_UI::Cursor& c)
 		return;
 	}
 
+	if (ob && ((ob->mode & OB_MODE_TEXTURE_PAINT) != 0)) {
+		return;
+	}
+
 	if (obedit) {
 		edbm_delete_exec(C);
 	}

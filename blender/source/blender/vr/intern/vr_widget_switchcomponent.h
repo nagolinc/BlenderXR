@@ -35,7 +35,8 @@
 /* Interaction widget for switching the currently active component mode. */
 class Widget_SwitchComponent : public VR_Widget
 {
-	friend class Widget_Sculpt;
+  friend class Widget_TexturePaint;
+  friend class Widget_Sculpt;
 	friend class Widget_SwitchLayout;
 
 public:

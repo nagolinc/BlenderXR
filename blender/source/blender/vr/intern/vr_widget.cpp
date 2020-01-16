@@ -56,6 +56,7 @@
 #include "vr_widget_menu.h"
 #include "vr_widget_navi.h"
 #include "vr_widget_redo.h"
+#include "vr_widget_texturepaint.h"
 #include "vr_widget_sculpt.h"
 #include "vr_widget_shift.h"
 #include "vr_widget_select.h"
@@ -146,6 +147,8 @@ VR_Widget* VR_Widget::get_widget(Type type, const char* ident)
 		return &Widget_LoopCut::obj;
 	case TYPE_KNIFE:
 		return &Widget_Knife::obj;
+	case TYPE_TEXTUREPAINT:
+		return &Widget_TexturePaint::obj;
 	case TYPE_SCULPT:
 		return &Widget_Sculpt::obj;
 	case TYPE_ANIMATION:
@@ -244,6 +247,9 @@ VR_Widget::Type VR_Widget::get_widget_type(const std::string& str)
 	}
 	if (str == "KNIFE") {
 		return TYPE_KNIFE;
+	}
+	if (str == "TEXTUREPAINT") {
+		return TYPE_TEXTUREPAINT;
 	}
 	if (str == "SCULPT") {
 		return TYPE_SCULPT;
@@ -358,6 +364,9 @@ VR_Widget* VR_Widget::get_widget(const std::string& str)
 	if (str == "KNIFE") {
 		return &Widget_Knife::obj;
 	}
+	if (str == "TEXTUREPAINT") {
+		return &Widget_TexturePaint::obj;
+	}
 	if (str == "SCULPT") {
 		return &Widget_Sculpt::obj;
 	}
@@ -433,6 +442,7 @@ std::vector<std::string> VR_Widget::list_widgets()
 	ret.push_back("BEVEL");
 	ret.push_back("LOOPCUT");
 	ret.push_back("KNIFE");
+    ret.push_back("TEXTUREPAINT");
 	ret.push_back("SCULPT");
 	ret.push_back("ANIMATION");
 	ret.push_back("CURSOROFFSET");
@@ -496,6 +506,8 @@ std::string VR_Widget::type_to_string(Type type)
 		return "LOOPCUT";
 	case TYPE_KNIFE:
 		return "KNIFE";
+    case TYPE_TEXTUREPAINT:
+      return "TEXTUREPAINT";
 	case TYPE_SCULPT:
 		return "SCULPT";
 	case TYPE_ANIMATION:

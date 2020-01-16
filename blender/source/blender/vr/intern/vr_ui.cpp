@@ -1187,6 +1187,11 @@ VR_UI::Error VR_UI::update_cursor(Cursor& c)
 					VR_UI::pie_menu_active[c.side] = true;
 					break;
 				}
+				case VR_Widget::TYPE_TEXTUREPAINT: {
+				  Widget_Menu::menu_type[c.side] = VR_Widget::MENUTYPE_AS_TEXTUREPAINT;
+				  VR_UI::pie_menu_active[c.side] = true;
+				  break;
+				}
 				case VR_Widget::TYPE_SCULPT: {
 					Widget_Menu::menu_type[c.side] = VR_Widget::MENUTYPE_AS_SCULPT;
 					VR_UI::pie_menu_active[c.side] = true;
@@ -1278,6 +1283,10 @@ VR_UI::Error VR_UI::update_cursor(Cursor& c)
 				case VR_Widget::TYPE_KNIFE: {
 					Widget_Menu::menu_type[c.side] = VR_Widget::MENUTYPE_TS_KNIFE;
 					break;
+				}
+				case VR_Widget::TYPE_TEXTUREPAINT: {
+				  Widget_Menu::menu_type[c.side] = VR_Widget::MENUTYPE_TS_TEXTUREPAINT;
+				  break;
 				}
 				case VR_Widget::TYPE_SCULPT: {
 					Widget_Menu::menu_type[c.side] = VR_Widget::MENUTYPE_TS_SCULPT;
@@ -2124,6 +2133,7 @@ VR_UI::Error VR_UI::execute_widget_renders(VR_Side side)
 
 	/* Apply widget render functions (if any). */
 	bool manip_rendered = false;
+    bool texturepaint_rendered = false;
 	bool sculpt_rendered = false;
 	bool anim_rendered = false;
 	for (VR_Layout::ButtonID btn = VR_Layout::ButtonID(0); btn < VR_Layout::BUTTONIDS; btn = VR_Layout::ButtonID(btn + 1)) {
@@ -2142,6 +2152,11 @@ VR_UI::Error VR_UI::execute_widget_renders(VR_Side side)
 					widget->render(side);
 					/* Prevent rendering from duplicate widgets. */
 					manip_rendered = true;
+				}
+				else if (type == VR_Widget::TYPE_TEXTUREPAINT && !texturepaint_rendered) {
+				  /* Texturepaint circle */
+				  widget->render(side);
+                  texturepaint_rendered = true;
 				}
 				else if (type == VR_Widget::TYPE_SCULPT && !sculpt_rendered) {
 					/* Sculpt sphere / circle */

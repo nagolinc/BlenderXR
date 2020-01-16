@@ -36,6 +36,7 @@
 
 #include "vr_widget_transform.h"
 #include "vr_widget_extrude.h"
+#include "vr_widget_texturepaint.h"
 #include "vr_widget_sculpt.h"
 
 #include "vr_math.h"
@@ -648,6 +649,10 @@ bool Widget_Transform::has_click(VR_UI::Cursor& c) const
 
 void Widget_Transform::click(VR_UI::Cursor& c)
 {
+	if (Widget_TexturePaint::is_dragging) {
+		return;
+	}
+	
 	if (Widget_Sculpt::is_dragging) {
 		return;
 	}
@@ -676,6 +681,10 @@ void Widget_Transform::drag_start(VR_UI::Cursor& c)
 		return;
 	}
 
+	if (Widget_TexturePaint::is_dragging) {
+		return;
+	}
+	
 	if (Widget_Sculpt::is_dragging) {
 		return;
 	}
@@ -833,6 +842,11 @@ void Widget_Transform::drag_start(VR_UI::Cursor& c)
 
 void Widget_Transform::drag_contd(VR_UI::Cursor& c)
 {
+	
+	if (Widget_TexturePaint::is_dragging) {
+		return;
+	}	
+	
 	if (Widget_Sculpt::is_dragging) {
 		return;
 	}
@@ -1882,6 +1896,11 @@ void Widget_Transform::drag_stop(VR_UI::Cursor& c)
 	}
 
 	is_dragging = false;
+
+
+	if (Widget_TexturePaint::is_dragging) {
+		return;
+	}	
 
 	if (Widget_Sculpt::is_dragging) {
 		return;

@@ -114,6 +114,7 @@
 #include "icon_bevel.png.h"
 #include "icon_loopcut.png.h"
 #include "icon_knife.png.h"
+#include "icon_texturepaint.png.h"
 #include "icon_sculpt.png.h"
 #include "icon_sculpt_draw.png.h"
 #include "icon_sculpt_clay.png.h"
@@ -241,6 +242,7 @@ VR_Draw::Texture *VR_Draw::insetfaces_tex(0);
 VR_Draw::Texture *VR_Draw::bevel_tex(0);
 VR_Draw::Texture *VR_Draw::loopcut_tex(0);
 VR_Draw::Texture *VR_Draw::knife_tex(0);
+VR_Draw::Texture *VR_Draw::texturepaint_tex(0);
 VR_Draw::Texture *VR_Draw::sculpt_tex(0);
 VR_Draw::Texture *VR_Draw::sculpt_draw_tex(0);
 VR_Draw::Texture *VR_Draw::sculpt_clay_tex(0);
@@ -395,6 +397,7 @@ int VR_Draw::init(void* display, void* drawable, void* context)
 	bevel_tex = new Texture(icon_bevel_png);
 	loopcut_tex = new Texture(icon_loopcut_png);
 	knife_tex = new Texture(icon_knife_png);
+    texturepaint_tex = new Texture(icon_texturepaint_png);
 	sculpt_tex = new Texture(icon_sculpt_png);
 	sculpt_draw_tex = new Texture(icon_sculpt_draw_png);
 	sculpt_clay_tex = new Texture(icon_sculpt_clay_png);
@@ -658,6 +661,10 @@ void VR_Draw::uninit()
 	if (knife_tex) {
 		delete knife_tex;
 		knife_tex = NULL;
+	}
+	if (texturepaint_tex) {
+    delete texturepaint_tex;
+    texturepaint_tex = NULL;
 	}
 	if (sculpt_tex) {
 		delete sculpt_tex;

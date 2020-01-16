@@ -32,6 +32,8 @@ set(INC
   ./extern/include/stb
 	../../../extern/Eigen3
 	../../../extern/glew/include/GL
+	../include
+    ../uvedit
 	../blenkernel
 	../blenlib
 	../blentranslation
@@ -46,12 +48,15 @@ set(INC
 	../editors/sculpt_paint
 	../editors/transform
 	../gpu
+	../imbuf
 	../makesdna
 	../makesrna
 	../render/extern/include
 	../windowmanager
 	../windowmanager/gizmo
 	../windowmanager/message_bus
+	../../../../intern/atomic
+    ../../../../intern/clog
 	../../../intern/glew-mx
 	../../../intern/guardedalloc
 )
@@ -90,6 +95,7 @@ set(SRC
 	intern/vr_widget_navi.cpp
 	intern/vr_widget_redo.cpp
 	intern/vr_widget_sculpt.cpp
+  intern/vr_widget_texturepaint.cpp
 	intern/vr_widget_select.cpp
 	intern/vr_widget_shift.cpp
 	intern/vr_widget_separate.cpp
@@ -130,7 +136,7 @@ set(SRC
 	intern/vr_widget_menu.h
 	intern/vr_widget_navi.h
 	intern/vr_widget_redo.h
-	intern/vr_widget_sculpt.h
+	intern/vr_widget_texturepaint.h
 	intern/vr_widget_select.h
 	intern/vr_widget_shift.h
 	intern/vr_widget_separate.h
@@ -140,6 +146,8 @@ set(SRC
 	intern/vr_widget_switchtool.h
 	intern/vr_widget_transform.h
 	intern/vr_widget_undo.h
+
+
 )
 
 add_definitions(${GL_DEFINITIONS})
@@ -152,6 +160,7 @@ endif()
 set(LIB
   bf_blenkernel
   bf_blenlib
+  bf_intern_clog
 )
 
 blender_add_lib(bf_vr "${SRC}" "${INC}" "${INC_SYS}" "${LIB}")

@@ -38,7 +38,8 @@
 /* Interaction widget for the Transform tool. */
 class Widget_Transform : public VR_Widget
 {
-	friend class Widget_Sculpt;
+  friend class Widget_TexturePaint;
+  friend class Widget_Sculpt;
 	friend class Widget_LoopCut;
 	friend class Widget_Extrude;
 	friend class Widget_SwitchLayout;

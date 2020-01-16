@@ -63,6 +63,9 @@ public:
 	virtual void drag_contd(VR_UI::Cursor& c) override;	/* Continue drag/hold with index finger / trigger. */
 	virtual void drag_stop(VR_UI::Cursor& c) override;	/* Stop drag/hold with index finger / trigger. */
 
+  Coord3Df calculated_coord(int index, int n);
+  int get_highlight_index(float angle, int n);
+
 	virtual void render_icon(const Mat44f& t, VR_Side controller_side, bool active = false, bool touched = false) override;	/* Render the icon/indication of the widget. */
 
 	/* Interaction widget for a VR pie menu (left controller). */

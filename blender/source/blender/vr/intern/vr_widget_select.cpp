@@ -37,6 +37,7 @@
 #include "vr_widget_transform.h"
 #include "vr_widget_select.h"
 
+#include "vr_widget_texturepaint.h"
 #include "vr_widget_sculpt.h"
 
 #include "vr_math.h"
@@ -978,6 +979,10 @@ bool Widget_Select::Raycast::has_click(VR_UI::Cursor& c) const
 
 void Widget_Select::Raycast::click(VR_UI::Cursor& c)
 {
+	if (Widget_TexturePaint::is_dragging) {
+		return;
+	}
+	
 	if (Widget_Sculpt::is_dragging) {
 		return;
 	}
@@ -1021,7 +1026,7 @@ void Widget_Select::Raycast::drag_stop(VR_UI::Cursor& c)
 {
 	VR_Side side = VR_UI::eye_dominance_get();
 
-	if (!Widget_Sculpt::is_dragging) {
+	if (!Widget_Sculpt::is_dragging && !Widget_TexturePaint::is_dragging) {
 		const Mat44f& m = c.position.get();
 		VR_UI::get_screen_coordinates(*(Coord3Df*)m.m[3], selection_rect[side].x1, selection_rect[side].y1, side);
 
@@ -1613,6 +1618,10 @@ void Widget_Select::Proximity::click(VR_UI::Cursor& c)
 		return;
 	}
 
+	if (Widget_TexturePaint::is_dragging) {
+		return;
+	}
+
 	if (Widget_Sculpt::is_dragging) {
 		return;
 	}
@@ -1677,7 +1686,7 @@ void Widget_Select::Proximity::drag_contd(VR_UI::Cursor& c)
 
 void Widget_Select::Proximity::drag_stop(VR_UI::Cursor& c)
 {
-	if (!Widget_Sculpt::is_dragging) {
+  if (!Widget_Sculpt::is_dragging && !Widget_TexturePaint::is_dragging) {
 		const Mat44f& m1 = c.position.get();
 		memcpy(&p1, m1.m[3], sizeof(float) * 3);
 

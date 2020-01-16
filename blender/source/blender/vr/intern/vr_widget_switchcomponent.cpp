@@ -35,6 +35,7 @@
 
 #include "vr_widget_switchcomponent.h"
 #include "vr_widget_transform.h"
+#include "vr_widget_texturepaint.h"
 #include "vr_widget_sculpt.h"
 
 #include "vr_math.h"
@@ -68,7 +69,7 @@ bool Widget_SwitchComponent::has_click(VR_UI::Cursor& c) const
 
 void Widget_SwitchComponent::click(VR_UI::Cursor& c)
 {
-	if (Widget_Transform::is_dragging || Widget_Sculpt::is_dragging) {
+  if (Widget_Transform::is_dragging || Widget_Sculpt::is_dragging || Widget_TexturePaint::is_dragging) {
 		/* Don't switch component modes if object data is currently being modified. */
 		return;
 	}

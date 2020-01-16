@@ -24,6 +24,10 @@
 #ifndef __ED_IMAGE_H__
 #define __ED_IMAGE_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct ARegion;
 struct ImBuf;
 struct Image;
@@ -115,5 +119,10 @@ bool ED_space_image_show_cache(struct SpaceImage *sima);
 bool ED_image_should_save_modified(const struct bContext *C);
 int ED_image_save_all_modified_info(const struct bContext *C, struct ReportList *reports);
 bool ED_image_save_all_modified(const struct bContext *C, struct ReportList *reports);
+
+ #ifdef __cplusplus
+}
+#endif
+
 
 #endif /* __ED_IMAGE_H__ */

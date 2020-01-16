@@ -20,6 +20,10 @@
  * \ingroup bke
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct Main;
 struct UndoStep;
 struct bContext;
@@ -197,5 +201,10 @@ void BKE_undosys_foreach_ID_ref(UndoStack *ustack,
 #endif
 
 void BKE_undosys_print(UndoStack *ustack);
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __BKE_UNDO_SYSTEM_H__ */
