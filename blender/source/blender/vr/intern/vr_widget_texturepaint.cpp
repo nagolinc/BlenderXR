@@ -408,7 +408,7 @@ static void paint_stroke_update_step(bContext *C, struct PaintStroke *stroke, Po
   size = RNA_float_get(itemptr, "size");
 
 
-  printf("update m:%f %f, p: %f, s: %f, f: %d\n", mouse[0], mouse[1], pressure, size, eraser);
+  //printf("update m:%f %f, p: %f, s: %f, f: %d\n", mouse[0], mouse[1], pressure, size, eraser);
 
   /* stroking with fill tool only acts on stroke end */
   if (brush->imagepaint_tool == PAINT_TOOL_FILL) {

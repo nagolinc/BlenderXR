@@ -711,7 +711,7 @@ void Widget_Menu::drag_start(VR_UI::Cursor &c)
       highlight_index[c.side] = 3;
     }
   }
-  else {
+  else if (num_items[c.side] <= 12) {
 
     // preserving this part till I can get rid of all subsequent references to angle2
     if (stick[c.side].x > 0) {
@@ -722,7 +722,6 @@ void Widget_Menu::drag_start(VR_UI::Cursor &c)
     }
     angle2 *= 6.0f;
 
-    /*
     if (angle2 >= 0 && angle2 < PI) {
       highlight_index[c.side] = 0;
     }
@@ -742,7 +741,7 @@ void Widget_Menu::drag_start(VR_UI::Cursor &c)
       highlight_index[c.side] = 10;
     }
     else if (angle2 >= 6 * PI || (angle2 < -5 * PI && angle2 >= -6 * PI)) {
-      / * exit region * /
+      /*exit region */ 
       highlight_index[c.side] = 11;
     }
     else if (angle2 < -4 * PI && angle2 >= -5 * PI) {
@@ -759,14 +758,9 @@ void Widget_Menu::drag_start(VR_UI::Cursor &c)
     }
     else {
       highlight_index[c.side] = 3;
-    }*/
-
-    // some madness here, fix later
-    /*int[] index_map = [ 0, 4, 6, 2, 8, 10, 11, 9, 7, 1, 5, 3 ];
-    if (index_to_highlight < 12) {
-      index_to_highlight = index_map[index_to_highlight];
-    }*/
-
+    }
+  }
+  else {
     highlight_index[c.side] = index_to_highlight;  // highlight
   }
 
@@ -819,7 +813,6 @@ void Widget_Menu::drag_contd(VR_UI::Cursor &c)
     }
   }
   float angle2 = angle[c.side] = stick[c.side].angle(Coord2Df(0, 1));
-  
 
   if (stick[c.side].x < 0) {
     angle[c.side] = -angle[c.side];
@@ -862,7 +855,7 @@ void Widget_Menu::drag_contd(VR_UI::Cursor &c)
       highlight_index[c.side] = 3;
     }
   }
-  else {
+  else if (num_items[c.side] <= 12) {
     if (stick[c.side].x > 0) {
       angle2 += PI / 12.0f;
     }
@@ -871,7 +864,7 @@ void Widget_Menu::drag_contd(VR_UI::Cursor &c)
     }
     angle2 *= 6.0f;
 
-    /* if (angle2 >= 0 && angle2 < PI) {
+    if (angle2 >= 0 && angle2 < PI) {
       highlight_index[c.side] = 0;
     }
     else if (angle2 >= PI && angle2 < 2 * PI) {
@@ -890,7 +883,7 @@ void Widget_Menu::drag_contd(VR_UI::Cursor &c)
       highlight_index[c.side] = 10;
     }
     else if (angle2 >= 6 * PI || (angle2 < -5 * PI && angle2 >= -6 * PI)) {
-      /* exit region * /
+      /* exit region */
       highlight_index[c.side] = 11;
     }
     else if (angle2 < -4 * PI && angle2 >= -5 * PI) {
@@ -907,8 +900,10 @@ void Widget_Menu::drag_contd(VR_UI::Cursor &c)
     }
     else {
       highlight_index[c.side] = 3;
-    }*/
-
+    }
+  }
+  else {
+    //13 or more items  
     highlight_index[c.side] = index_to_highlight;  // highlight
   }
 
@@ -946,9 +941,7 @@ void Widget_Menu::drag_stop(VR_UI::Cursor &c)
     index_to_highlight = Widget_Menu::get_highlight_index(-angle2, num_items[c.side]);
   }
 
-
-  if (num_items[c.side] < 8)
-  {
+  if (num_items[c.side] < 8) {
     if (stick[c.side].x > 0) {
       angle2 += PI / 8.0f;
     }
@@ -957,8 +950,7 @@ void Widget_Menu::drag_stop(VR_UI::Cursor &c)
     }
     angle2 *= 4.0f;
   }
-  else
-  {
+  else {
     if (stick[c.side].x > 0) {
       angle2 += PI / 12.0f;
     }
@@ -3836,8 +3828,8 @@ void Widget_Menu::render_icon(const Mat44f &t, VR_Side controller_side, bool act
       }
       case MENUTYPE_TS_ADDPRIMITIVE: {
 
-        int index_map[12] = {0, 4, 6, 2, 8, 10, 11, 9, 7, 1, 5, 3};
-        menu_highlight_index = index_map[menu_highlight_index];
+        // int index_map[12] = {0, 4, 6, 2, 8, 10, 11, 9, 7, 1, 5, 3};
+        // menu_highlight_index = index_map[menu_highlight_index];
 
         /* index = 0 */
         if (Widget_AddPrimitive::primitive == Widget_AddPrimitive::PRIMITIVE_PLANE) {
@@ -6203,8 +6195,8 @@ void Widget_Menu::render_icon(const Mat44f &t, VR_Side controller_side, bool act
       case MENUTYPE_MAIN_12: {
 
         // fix crazy coords
-        int index_map[12] = {0, 4, 6, 2, 8, 10, 11, 9, 7, 1, 5, 3};
-        menu_highlight_index = index_map[menu_highlight_index];
+        // int index_map[12] = {0, 4, 6, 2, 8, 10, 11, 9, 7, 1, 5, 3};
+        // menu_highlight_index = index_map[menu_highlight_index];
 
         /* index = 0 */
         if (menu_highlight_index == 0) {
@@ -6528,9 +6520,10 @@ int Widget_Menu::get_highlight_index(float angle2, int n)
   float angle3 = angle2;  // make angle 3 between [0, 2*PI]
   if (angle3 < 0) {
     angle3 = 2 * PI + angle3;
-    //angle3 = 0.75*2*PI;
+    // angle3 = 0.75*2*PI;
   }
-  int index_to_highlight = (int)(round( n * angle3 / (2 * PI))) %n;  // round to an integer between [0,num_items)
+  int index_to_highlight = (int)(round(n * angle3 / (2 * PI))) %
+                           n;  // round to an integer between [0,num_items)
 
   return index_to_highlight;
 }
